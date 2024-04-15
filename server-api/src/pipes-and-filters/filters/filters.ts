@@ -24,3 +24,21 @@ export const filtroCedula = (input: Client): Client => {
         throw new Error('Número de cédula inválido');
     }
 };
+
+// Tercer filtro: Verificar que el departamento sea válido entre los 19 de Uruguay
+export const filtroDepartamentoValido = (input: Client): Client => {
+    const departamentosUruguay = [
+        "artigas", "canelones", "cerro largo", "colonia", "durazno",
+        "flores", "florida", "lavalleja", "maldonado", "montevideo",
+        "paysandu", "rio negro", "rivera", "rocha", "salto", "san jose",
+        "soriano", "tacuarembo", "treinta y tres"
+    ];
+
+    const departamentoCliente = input.departamento.toLowerCase();
+
+    if (departamentosUruguay.indexOf(departamentoCliente)!==-1) {
+        throw new Error("El departamento proporcionado no es válido en Uruguay.");
+    }
+
+    return input;
+};
