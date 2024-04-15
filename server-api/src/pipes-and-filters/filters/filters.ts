@@ -9,16 +9,15 @@ export const filtroTelefonoConEspacios = (input: Client): Client => {
     } else {
         throw new Error('Número de teléfono inválido');
     }
-    console.log(`Filtro filtroTelefonoConEspacios, input ${JSON.stringify(input)}, output ${result}`);
     return input;
 };
 
 // Segundo filtro: Valida el formato del número de cédula.
+// (Al ser de tipo number no podemos validar que empiece por 0 ya que eso es imposible para este tipo)
 export const filtroCedula = (input: Client): Client => {
     const cedula: number = input.cedula;
     const cedulaString: string = cedula.toString(); // Convertir a string para aplicar la expresión regular
     if (/^[1-9]\d{6,7}$/.test(cedulaString)) {
-        console.log(`Filtro filtroCedula, input ${JSON.stringify(input)}, output ${cedula}`);
         return input;
     } else {
         throw new Error('Número de cédula inválido');
@@ -36,14 +35,14 @@ export const filtroDepartamentoValido = (input: Client): Client => {
 
     const departamentoCliente = input.departamento.toLowerCase();
 
-    if (departamentosUruguay.indexOf(departamentoCliente)!==-1) {
+    if (departamentosUruguay.indexOf(departamentoCliente) == -1) {
         throw new Error("El departamento proporcionado no es válido en Uruguay.");
     }
 
     return input;
 };
 
-export const imprimirSiNecesitaMovilidad = (input: Client): Client => {
+export const filtroNecesitaMovilidad = (input: Client): Client => {
     if (input.necesita_asistencia_movilidad === true){
         console.log(`La persona ${input.nombre} ${input.apellido} necesita asistencia en movilidad`)
     }else if(input.necesita_asistencia_movilidad === false){
