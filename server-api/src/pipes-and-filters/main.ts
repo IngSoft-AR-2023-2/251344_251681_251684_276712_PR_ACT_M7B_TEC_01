@@ -1,7 +1,7 @@
 
 import { QueueFactory } from './pipeline/QueueFactory';
 import { Pipeline } from './pipeline/Pipeline';
-import { toLowercaseWithSpaces, toUppercase, replaceSpacesWithDots, filterWithRandomError } from './filters/filters';
+import { filtroTelefono, filtroCedula } from './filters/filters';
 import fs from "fs";
 import { Client } from './data-structure/Client';
 
@@ -9,7 +9,7 @@ import { Client } from './data-structure/Client';
 const queueFactory = QueueFactory.getQueueFactory<Client>; //ojo que no la invoca aca si no dentro de la Pipeline
 
 // Crear una nueva instancia de Pipeline usando Bull como backend de la cola
-const pipeline = new Pipeline<Client>([toLowercaseWithSpaces, filterWithRandomError,toUppercase, replaceSpacesWithDots], queueFactory);
+const pipeline = new Pipeline<Client>([filtroTelefono, filtroCedula], queueFactory);
 
 let outputs: string[] = [];
 
