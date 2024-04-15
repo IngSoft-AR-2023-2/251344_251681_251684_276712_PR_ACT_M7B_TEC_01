@@ -42,3 +42,15 @@ export const filtroDepartamentoValido = (input: Client): Client => {
 
     return input;
 };
+
+export const imprimirSiNecesitaMovilidad = (input: Client): Client => {
+    if (input.necesita_asistencia_movilidad === true){
+        console.log(`La persona ${input.nombre} ${input.apellido} necesita asistencia en movilidad`)
+    }else if(input.necesita_asistencia_movilidad === false){
+        console.log(`La persona ${input.nombre} ${input.apellido} será agendado en el proceso común`)
+    }else{
+        throw new Error("necesita_asistencia_movilidad no era ni true ni false");
+    }
+
+    return input
+}
